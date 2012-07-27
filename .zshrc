@@ -1,5 +1,7 @@
 #=============================================================#
 export LANG=ja_JP.UTF-8
+export PATH="/Users/ytakasuk/bin:/usr/local/bin/:/usr/local/sbin/:/usr/local/Cellar/php/5.3.10/bin:$PATH"
+export EDITOR="vim"
 #=============================================================#
 
 #=============================================================#
@@ -13,15 +15,11 @@ alias klabmemo='vim ~/Documents/klab.txt'
 alias memo='vim ~/Documents/memo.txt'
 alias screenrc='vim ~/.screenrc'
 alias reload='source ~/.zshrc ~/.screenrc ~/.vimrc'
-#alias ctags='ctags -R --regex-php="/^[ \t]*const[ \t]+([a-z0-9_]+)/\1/d/i"'
-alias tmux='tmuxx'
-alias tm='tmuxx'
+alias ctags='ctags -R --regex-php="/^[ \t]*const[ \t]+([a-z0-9_]+)/\1/d/i"'
+alias tm='tmux'
 alias tma='tmux attach'
 alias tml='tmux list-window'
-#=============================================================#
-
-#=============================================================#
-PATH="/Users/ytakasuk/bin:/usr/local/bin/:$PATH"
+alias grep='grep --color'
 #=============================================================#
 
 #=============================================================#

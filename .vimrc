@@ -7,6 +7,7 @@ Bundle 'Shougo/vimproc'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/neocomplcache-snippets-complete'
+Bundle 'Shougo/vimfiler'
 Bundle 'thinca/vim-ref'
 Bundle 'thinca/vim-quickrun'
 Bundle 'tpope/vim-surround'
@@ -18,12 +19,16 @@ Bundle 'LeafCage/foldCC'
 "Bundle 'altercation/vim-colors-solarized'
 "Bundle 'vim-scripts/DirDiff.vim'
 Bundle 'vim-scripts/wombat256.vim'
+Bundle 'opsplorer'
 filetype plugin indent on
 
 " ============================================================================= 
 "colorscheme wombat256mod 
-colorscheme jellybeans
+"colorscheme jellybeans
+colorscheme desert
 syntax enable
+set encoding=utf-8
+set fileencodings=utf-8,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932
 set background=light
 set number
 set cursorline
@@ -69,7 +74,23 @@ let g:neocomplcache_enable_smart_case = 1                   " smartcase有効化
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neocomplcache_snippets_expand)
 smap <C-k>     <Plug>(neocomplcache_snippets_expand)
-	
+
+" tab補完
+function InsertTabWrapper()
+    if pumvisible()
+        return "\<c-n>"
+    endif
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k\|<\|/'
+        return "\<tab>"
+    elseif exists('&omnifunc') && &omnifunc == ''
+        return "\<c-n>"
+    else
+        return "\<c-x>\<c-o>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+
 " ============================================================================= 
 " ref.vim
 let g:ref_phpmanual_path = $HOME . '/.vim/bundle/vim-ref/php-chunked-xhtml'
@@ -78,8 +99,11 @@ let g:ref_phpmanual_path = $HOME . '/.vim/bundle/vim-ref/php-chunked-xhtml'
 " ============================================================================= 
 " Unite
 nnoremap <silent> :ub : Unite -auto-resize  -no-quit -buffer-name=buffer buffer:! <CR>
+nnoremap <silent> ;ub : Unite -auto-resize  -no-quit -buffer-name=buffer buffer:! <CR>
 nnoremap <silent> :ud : Unite -winheight=15 -no-quit -buffer-name=files  file file_rec file_mru <CR>
+nnoremap <silent> ;ud : Unite -winheight=15 -no-quit -buffer-name=files  file file_rec file_mru <CR>
 nnoremap <silent> :ug : Unite -winheight=15 -no-quit -buffer-name=grep   grep <CR>
+nnoremap <silent> ;ug : Unite -winheight=15 -no-quit -buffer-name=grep   grep <CR>
 " ============================================================================= 
 
 " ============================================================================= 
