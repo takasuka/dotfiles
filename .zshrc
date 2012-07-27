@@ -26,7 +26,8 @@ alias grep='grep --color'
 #0:black、1:red、2:green、3:yellow、4:blue、5:magenta、6:cyan、7:white
 autoload -Uz colors
 colors
-PROMPT=%F{2}%n@%m%f%F{5}::%f
+#PROMPT=%F{2}%n@%m%f%F{5}::%f #tmux入れたしいらないかも
+PROMPT=%F{2}"⧴ "%f
 #RPROMPT=%B%F{1}[%~]%f%b%D
 RPROMPT=%B%F{1}[%~]
 #=============================================================#
