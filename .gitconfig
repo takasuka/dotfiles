@@ -1,0 +1,11 @@
+[user]
+	name = Yu Takasuka
+	email = yu@takasuka.net
+[color]
+	ui = auto
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	hist = log --graph --all --color --pretty='%x09%h %cn %cd %x09%s %Cred%d%Creset'
