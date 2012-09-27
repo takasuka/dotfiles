@@ -2,6 +2,8 @@
 export LANG=ja_JP.UTF-8
 export PATH="/Users/ytakasuk/bin:/usr/local/bin/:/usr/local/sbin/:/usr/local/Cellar/php/5.3.10/bin:$PATH"
 export EDITOR="vim"
+export JENKINS_HOME="/Users/Shared/Jenkins/Home"
+bindkey -e
 #=============================================================#
 
 #=============================================================#
@@ -24,12 +26,25 @@ alias grep='grep --color'
 
 #=============================================================#
 #0:black、1:red、2:green、3:yellow、4:blue、5:magenta、6:cyan、7:white
+setopt prompt_subst
 autoload -Uz colors
+autoload -Uz vcs_info
 colors
-#PROMPT=%F{2}%n@%m%f%F{5}::%f #tmux入れたしいらないかも
-PROMPT=%F{2}"⧴ "%f
-#RPROMPT=%B%F{1}[%~]%f%b%D
-RPROMPT=%B%F{1}[%~]
+zstyle ':vcs_info:*' disable bzr
+#zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+#zstyle ':vcs_info:*' formats       '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+zstyle ':vcs_info:git:*' stagedstr "+"    # 適当な文字列に変更する
+zstyle ':vcs_info:git:*' unstagedstr "-"  # 適当の文字列に変更する
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+zstyle ':vcs_info:*' formats '[%b]'
+precmd () {
+    vcs_info 
+    psvar[1]="$vcs_info_msg_0_"
+}
+PROMPT=%F{2}%n@%m%f%F{5}::%f #tmux入れたしいらないかも
+#PS1='%F{5}[%F{2}%n%F{5}] %F{3}%3~ v%f%# '
+RPROMPT=%B%F{6}%1v%f%F{1}[%~]%f%b
+#RPROMPT='«`rprompt-git-current-branch`»%B%F{1}[%~]'
 #=============================================================#
 
 #=============================================================#

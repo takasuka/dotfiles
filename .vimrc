@@ -8,11 +8,15 @@ Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/neocomplcache-snippets-complete'
 Bundle 'Shougo/vimfiler'
+Bundle 'Shougo/vimshell'
 Bundle 'thinca/vim-ref'
 Bundle 'thinca/vim-quickrun'
 Bundle 'tpope/vim-surround'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'LeafCage/foldCC'
+Bundle 'kokukuma/vim-unite-bzr'
+Bundle 'beyondwords/vim-twig'
+"Bundle 'thinca/vim-ft-vim_fold'
 "Bundle 'mattn/webapi-vim'
 "Bundle 'thinca/vim-openbuf'
 "Bundle 'choplin/unite-vim_hacks'
@@ -20,6 +24,7 @@ Bundle 'LeafCage/foldCC'
 "Bundle 'vim-scripts/DirDiff.vim'
 Bundle 'vim-scripts/wombat256.vim'
 Bundle 'opsplorer'
+Bundle 'tpope/vim-fugitive.git'
 filetype plugin indent on
 
 " ============================================================================= 
@@ -39,6 +44,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set foldmethod=marker
+"set foldmethod=expr
 set laststatus=2
 set statusline=%F%m%r\ [%{&fileencoding}][%{&fileformat}]\ \%y\ %=%c,%l%11p%%
 set incsearch
@@ -50,6 +56,10 @@ highlight Visual ctermbg=DarkGray
 highlight Pmenu  ctermbg=DarkGray
 highlight PmenuSel  ctermbg=Black
 highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+hi DiffAdd    ctermfg=black ctermbg=2
+hi DiffChange ctermfg=black ctermbg=3
+hi DiffDelete ctermfg=black ctermbg=6
+hi DiffText   ctermfg=black ctermbg=7
 " ============================================================================= 
 
 " ============================================================================= 
@@ -63,7 +73,7 @@ nnoremap k gk
 onoremap k gk
 xnoremap k gk
 " USキーボード対策
-noremap ; :
+noremap ; : 
 " ============================================================================= 
 
 " ============================================================================= 
@@ -75,21 +85,7 @@ let g:neocomplcache_enable_smart_case = 1                   " smartcase有効化
 imap <C-k>     <Plug>(neocomplcache_snippets_expand)
 smap <C-k>     <Plug>(neocomplcache_snippets_expand)
 
-" tab補完
-function InsertTabWrapper()
-    if pumvisible()
-        return "\<c-n>"
-    endif
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k\|<\|/'
-        return "\<tab>"
-    elseif exists('&omnifunc') && &omnifunc == ''
-        return "\<c-n>"
-    else
-        return "\<c-x>\<c-o>"
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+"inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
 " ============================================================================= 
 " ref.vim
@@ -98,8 +94,8 @@ let g:ref_phpmanual_path = $HOME . '/.vim/bundle/vim-ref/php-chunked-xhtml'
 
 " ============================================================================= 
 " Unite
-nnoremap <silent> :ub : Unite -auto-resize  -no-quit -buffer-name=buffer buffer:! <CR>
-nnoremap <silent> ;ub : Unite -auto-resize  -no-quit -buffer-name=buffer buffer:! <CR>
+nnoremap <silent> :ub : Unite -auto-resize  -buffer-name=buffer buffer:! <CR>
+nnoremap <silent> ;ub : Unite -auto-resize  -buffer-name=buffer buffer:! <CR>
 nnoremap <silent> :ud : Unite -winheight=15 -no-quit -buffer-name=files  file file_rec file_mru <CR>
 nnoremap <silent> ;ud : Unite -winheight=15 -no-quit -buffer-name=files  file file_rec file_mru <CR>
 nnoremap <silent> :ug : Unite -winheight=15 -no-quit -buffer-name=grep   grep <CR>
@@ -108,7 +104,7 @@ nnoremap <silent> ;ug : Unite -winheight=15 -no-quit -buffer-name=grep   grep <C
 
 " ============================================================================= 
 " PHP向け
-autocmd BufWritePost *.php :call PHPLint()                                                                                                                                          
+autocmd BufWritePost *.php :call PHPLint()
 function PHPLint()
   let error = system(&ft . ' -l ' . bufname(''))
   if strpart(error, 0, 16) != 'No syntax errors'

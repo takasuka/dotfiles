@@ -9,3 +9,5 @@
 	st = status
 	br = branch
 	hist = log --graph --all --color --pretty='%x09%h %cn %cd %x09%s %Cred%d%Creset'
+[core]
+	excludesfile = /Users/ytakasuk/.gitignore
