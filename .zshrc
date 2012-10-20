@@ -1,7 +1,8 @@
 #=============================================================#
 export LANG=ja_JP.UTF-8
-export PATH="/Users/ytakasuk/bin:/usr/local/bin/:/usr/local/sbin/:/usr/local/Cellar/php/5.3.10/bin:$PATH"
+export PATH="/Users/ytakasuk/bin/:/usr/local/bin/:/usr/local/sbin/:/usr/local/Cellar/php/5.3.10/bin/:$PATH"
 export EDITOR="vim"
+export __CF_USER_TEXT_ENCODING="0x1F5:0x08000100:14"
 export JENKINS_HOME="/Users/Shared/Jenkins/Home"
 bindkey -e
 #=============================================================#
@@ -22,6 +23,7 @@ alias tm='tmux'
 alias tma='tmux attach'
 alias tml='tmux list-window'
 alias grep='grep --color'
+alias phpunit='phpunit --colors --verbose'
 #=============================================================#
 
 #=============================================================#

@@ -8,6 +8,7 @@
 	ci = commit
 	st = status
 	br = branch
+    lg = log --graph --stat
 	hist = log --graph --all --color --pretty='%x09%h %cn %cd %x09%s %Cred%d%Creset'
 [core]
 	excludesfile = /Users/ytakasuk/.gitignore

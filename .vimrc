@@ -1,6 +1,6 @@
 set nocompatible
 filetype off
-set rtp+=~/.vim/vundle.git/
+set rtp+=~/.vim/vundle/
 call vundle#rc()
 
 Bundle 'Shougo/vimproc'
@@ -16,6 +16,8 @@ Bundle 'nanotech/jellybeans.vim'
 Bundle 'LeafCage/foldCC'
 Bundle 'kokukuma/vim-unite-bzr'
 Bundle 'beyondwords/vim-twig'
+Bundle 'kana/vim-fakeclip'
+Bundle 'tpope/vim-fugitive'
 "Bundle 'thinca/vim-ft-vim_fold'
 "Bundle 'mattn/webapi-vim'
 "Bundle 'thinca/vim-openbuf'
@@ -24,7 +26,6 @@ Bundle 'beyondwords/vim-twig'
 "Bundle 'vim-scripts/DirDiff.vim'
 Bundle 'vim-scripts/wombat256.vim'
 Bundle 'opsplorer'
-Bundle 'tpope/vim-fugitive.git'
 filetype plugin indent on
 
 " ============================================================================= 
@@ -32,6 +33,7 @@ filetype plugin indent on
 "colorscheme jellybeans
 colorscheme desert
 syntax enable
+set gfn=SourceCodePro\ 10
 set encoding=utf-8
 set fileencodings=utf-8,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932
 set background=light
@@ -65,6 +67,9 @@ hi DiffText   ctermfg=black ctermbg=7
 " ============================================================================= 
 " key mapping
 nnoremap <silent> date : r! date "+\%Y/\%m/\%d \%A" <CR>
+nmap t :tabnew .
+nnoremap ] :tabnext<CR>
+nmap [ :tabprevious<CR>
 " snippet展開対応済み
 nnoremap j gj
 onoremap j gj
@@ -118,3 +123,6 @@ endfunction
 hi Folded gui=bold term=standout ctermfg=DarkBlue
 set foldtext=FoldCCtext()
 " ============================================================================= 
+
+" Alignを日本語環境で使用するための設定
+:let g:Align_xstrlen = 3
